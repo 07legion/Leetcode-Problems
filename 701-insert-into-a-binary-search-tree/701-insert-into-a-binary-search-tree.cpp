@@ -19,17 +19,6 @@ public:
             if (parent && val > parent->val) parent->right = temp;
             return;
         }
-        if (!parent && !root && val < parent->val && val > root->val) {
-            node* temp = new node(val, NULL, NULL);
-            parent->left = temp;
-            temp->left = root;
-            return;
-        } else if (!parent && !root && val > parent->val && val < root->val) {
-            node* temp = new node(val, NULL, NULL);
-            parent->right = temp;
-            temp->right = root;
-            return;
-        }
         if (val < root->val) {
             func(root->left, root, val);
         } else func(root->right, root, val);
