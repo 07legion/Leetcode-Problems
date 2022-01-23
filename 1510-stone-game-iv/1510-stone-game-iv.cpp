@@ -5,7 +5,7 @@ private:
 public:
     bool func(int target, bool ch) {
         if (dp[ch][target] != -1) return dp[ch][target];
-        int a = 0;
+        bool a = false;
         for(auto it:v) {
             if (target >= it) {
                 a |= !func(target-it, !ch);
