@@ -9,9 +9,9 @@ public:
         for(auto it:v) {
             if (target >= it) {
                 a |= !func(target-it, !ch);
-                if (a > 0) break;
+                if (a) break;
             }
-        }        
+        }
         return dp[ch][target] = a;
     }
     bool winnerSquareGame(int n) {
