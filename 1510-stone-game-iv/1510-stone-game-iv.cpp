@@ -8,17 +8,10 @@ public:
         int a = 0;
         for(auto it:v) {
             if (target >= it) {
-                a += !func(target-it, !ch);
+                a |= !func(target-it, !ch);
                 if (a > 0) break;
             }
-        }
-        // if (ch) {
-        //     if (a == false) return true;
-        //     else return false;
-        // } else {
-        //     if (a == true) return false;
-        //     else return true;
-        // }
+        }        
         return dp[ch][target] = a;
     }
     bool winnerSquareGame(int n) {
