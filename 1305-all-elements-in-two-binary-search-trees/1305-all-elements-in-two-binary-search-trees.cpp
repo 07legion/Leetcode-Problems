@@ -12,7 +12,6 @@
 using node = TreeNode;
 class Solution {
 private: 
-    // vector<int> v3;
     vector<int> v1, v2;    
 public:
     void func(node* root1, node* root2) {
@@ -23,10 +22,7 @@ public:
         func(root1 ? root1->right : root1, root2 ? root2->right : root2);
     }
     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
-        // vector<int> v1; v3.clear();
         func(root1, root2);
-        // vector<int> v2; v3.clear();
-        // func(root2);
         vector<int> v(v1.size() + v2.size(), 0);
         int i = 0, j = 0, k = 0;
         while(i < v1.size() && j < v2.size()) {
