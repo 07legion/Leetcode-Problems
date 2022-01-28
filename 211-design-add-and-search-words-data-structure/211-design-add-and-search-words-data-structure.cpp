@@ -39,14 +39,6 @@ public:
     bool search(string str) {
         node* curr = root;
         return func(curr, 0, str);
-        // for(int i=0;i<str.length();i++) {
-        //     if (str[i] == '.' || (curr && curr->children[str[i]-'a'])) {
-        //         curr = curr->children[str[i] - 'a'];
-        //         continue;
-        //     }
-        //     return false;
-        // }
-        // return true;
     }
 };
 
