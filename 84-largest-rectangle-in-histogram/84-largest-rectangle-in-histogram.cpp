@@ -34,19 +34,11 @@ public:
             }
             st.push({v[i], i});
         }
-        // for(auto it:nsl) cout<<"("<<it.first<<", "<<it.second<<") "; cout<<"\n";
-        // for(auto it:nsr) cout<<"("<<it.first<<", "<<it.second<<") "; cout<<"\n";
         int ans = 0;
         for(int i=0;i<n;i++) {
             int temp = 0;
-            // if (nsl[i].second != -1) {
-                temp += abs(i - nsl[i].second) * (v[i]);
-            // cout<<temp<<" ";
-            // }
-            // if (nsr[i].second != -1) {
-                temp += abs(i - nsr[i].second) * (v[i]);
-            // }
-            // cout<<temp<<"\n";
+            temp += abs(i - nsl[i].second) * (v[i]);
+            temp += abs(i - nsr[i].second) * (v[i]);
             ans = max({ans, temp-v[i], v[i]});
         }
         return ans;
