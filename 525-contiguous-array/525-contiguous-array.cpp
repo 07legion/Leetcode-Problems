@@ -1,27 +1,19 @@
 class Solution {
 public:
-    int findMaxLength(vector<int>& nums) {
-        unordered_map<int,int> mp; //map of <gain,index> form
-        mp[0]=-1; //add starting index with default gain of 0 at -1
-        //change all zeros to -1
-        for(int i=0;i<nums.size();i++){
-            nums[i]==0?nums[i]=-1:nums[i]=1;
-        }
-        int sum=0,res=0;
-        for(int i=0;i<nums.size();i++){
-            //cumulative sum
-            sum+=nums[i];
-            
-            //check if value already exists in the map
-            if(mp.find(sum)!=mp.end()){
-                //finding the length of possible subarray and comparing with the max result
-                res=max(res,i-mp[sum]);
+    int findMaxLength(vector<int>& v) {
+        map<int, int> mp;
+        int sm = 0, n = v.size(), ans = 0;
+        for(int i=0;i<n;i++) {
+            sm += v[i] == 0 ? -1 : 1;
+            if (!sm) {
+                ans = max(ans, i + 1);
             }
-            else{
-                //adding value to our map
-                mp[sum]=i;
+            else if (mp.find(sm) == mp.end()) {
+                mp[sm] = i;
+            } else {
+                ans = max(ans, abs(i - mp[sm]));
             }
         }
-        return res;
+        return ans;
     }
 };
