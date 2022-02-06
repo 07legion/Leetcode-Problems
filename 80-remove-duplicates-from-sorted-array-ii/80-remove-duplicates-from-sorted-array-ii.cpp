@@ -7,7 +7,6 @@ public:
                 v[i++] = it;
             }
         }
-        for(auto it:v) cout<<it<<" "; cout<<"\n";
         return i;
     }
 };
