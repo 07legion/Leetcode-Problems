@@ -21,7 +21,6 @@ public:
                         }
                         temp[i] = c;
                     }
-                    // temp[i] = c;
                 }
             }
             a++;            
