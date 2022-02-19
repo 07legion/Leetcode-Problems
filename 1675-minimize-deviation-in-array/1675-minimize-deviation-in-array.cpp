@@ -12,14 +12,12 @@ public:
         }
         ans = min(ans, pq.top() - mn);
         while(pq.top() % 2 == 0) {
-            // ans = min(ans, pq.top() - mn);
             int a = pq.top();
             pq.push(a / 2);
             mn = min(mn, a / 2);
             pq.pop();
             ans = min(ans, pq.top() - mn);
         }
-        // return min(ans, pq.top() - mn);
         return ans;
     }
 };
