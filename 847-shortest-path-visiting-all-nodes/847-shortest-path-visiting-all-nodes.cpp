@@ -24,7 +24,7 @@ const long long int MAX = 1000000007;
 // };
 
 
-// ------ BFS
+// ------ BFS (more intuitive!)
 class Solution {
 public:
     int shortestPathLength(vector<vector<int>>& v) {
