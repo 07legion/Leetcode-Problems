@@ -3,26 +3,25 @@ public:
 
     TreeNode* getLCA(TreeNode* root, int start, int dest) {
         if(!root) return NULL;
-        
         if(root->val == start || root->val == dest) return root;
-        
         TreeNode* left = getLCA(root->left, start, dest);
         TreeNode* right = getLCA(root->right, start, dest);
-        
         if(left && right) return root;
-        
         return left ? left : right;
     }
     bool f(TreeNode* root, string& path, int val) {
         if (!root) return false;
-        if (root->val == val) {
-            return true;
-        }
+        // if (root->val == val) {
+        //     return true;
+        // }
         if (root->left && f(root->left, path, val)) {
             path += 'L';
         } else if (root->right && f(root->right, path, val)) {
             path += 'R';
         }
+        if (root->val == val) {
+            return true;
+        }        
         return !path.empty();
     }
     
