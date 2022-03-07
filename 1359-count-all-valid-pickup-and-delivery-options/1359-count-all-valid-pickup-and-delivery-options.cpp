@@ -1,15 +1,17 @@
 const long long int mod = 1e9 + 7;
 class Solution {
+private:
+    long long int dp[501][501];
+private:
+    long long int func(int p, int u) {
+        if (p == 0 && u == 0) return 1;
+        if (p < 0 || u < 0 || u < p) return 0ll;
+        if (dp[p][u] != -1ll) return dp[p][u];
+        return dp[p][u] = p * func(p-1, u) % mod + (u - p) * func(p, u - 1) % mod;
+    }
 public:
     int countOrders(int n) {
-        long long int dp[n+1];
-        dp[1] = 1;
-        // dp[2] = 6;
-        for(int i=2;i<=n;i++) {
-            long long int a = 2 * 1ll * i - 1ll;
-            dp[i] = dp[i-1] * (((a * (a + 1ll)) / 2) % mod);
-            dp[i] = dp[i] % mod;
-        }
-        return dp[n];
+        memset(dp, -1ll, sizeof dp);
+        return int(func(n, n));
     }
 };
