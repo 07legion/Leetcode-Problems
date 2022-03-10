@@ -104,31 +104,30 @@ using node = Node;
 class Solution {
     public:
     vector <int> zigZagTraversal(Node* root) {
-        stack<node* > st1, st2;
-        st1.push(root);
+        deque<node* > q;
+        q.push_back(root);
+        int level = 0;
         vector<int> v;
-        int i = 0;
-        while(!st1.empty() || !st2.empty()) {
-            if (i % 2) {
-                while(!st2.empty()) {
-                    if (st2.top()->right)
-                        st1.push(st2.top()->right);
-                    if (st2.top()->left)
-                        st1.push(st2.top()->left);
-                    v.push_back(st2.top()->data);
-                    st2.pop();
+        while(!q.empty()) {
+            int n = q.size();
+            if (level % 2 == 0) {
+                for(int i=0;i<n;i++) {
+                    node* temp = q.front();
+                    v.push_back(temp->data);
+                    if (temp->left)  q.push_back(temp->left);
+                    if (temp->right) q.push_back(temp->right);
+                    q.pop_front();
                 }
             } else {
-                while(!st1.empty()) {
-                    if (st1.top()->left)
-                        st2.push(st1.top()->left);
-                    if (st1.top()->right)                
-                        st2.push(st1.top()->right);
-                    v.push_back(st1.top()->data);                    
-                    st1.pop();
+                for(int i=0;i<n;i++) {
+                    node* temp = q.back();
+                    v.push_back(temp->data);
+                    if (temp->right) q.push_front(temp->right);
+                    if (temp->left) q.push_front(temp->left);
+                    q.pop_back();
                 }
             }
-            i++;
+            level++;
         }
         return v;
     }
