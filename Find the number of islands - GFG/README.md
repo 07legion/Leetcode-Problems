@@ -1,5 +1,5 @@
 # Find the number of islands
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a grid of size n*m (n is number of rows and m is number of columns grid has) consisting of '0's(Water)&nbsp;and '1's(Land). Find the number of islands.</span><br>
 <strong><span style="font-size:18px">Note: </span></strong><span style="font-size:18px">An&nbsp;island&nbsp;is surrounded by water and is formed by connecting adjacent lands horizontally or vertically or diagonally i.e., in all 8 directions.</span><br>
