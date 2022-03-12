@@ -100,92 +100,31 @@ struct Node
     Node* right;
 };
 */
-// using node = Node;
-// class Solution{
-//   private:
-//     map<node*, int> mp;
-//   public:
-//     int func(node* root) {
-//         if (!root) return 0;
-        
-//         if (mp.find(root) != mp.end()) return mp[root];
-        
-//         int a = root->data;
-//         if (root->left)
-//             a += func(root->left->left) + func(root->left->right);
-//         if (root->right)
-//             a += func(root->right->right) + func(root->right->right);
-        
-//         int b = 0;
-//         b += func(root->left) + func(root->right);
-        
-//         return mp[root] = max(a, b);
-//     }
-//     int getMaxSum(Node *root)  {
-//         return func(root);
-//     }
-// };
-
-// --
-
+using node = Node;
 class Solution{
+  private:
+    map<node*, int> mp;
   public:
-int sumOfGrandChildren(Node* node, map<Node*, int>& mp);
-int getMaxSum(Node* node);
-int getMaxSumUtil(Node* node, map<Node*, int>& mp);
+    int func(node* root) {
+        if (!root) return 0;
+        
+        if (mp.find(root) != mp.end()) return mp[root];
+        
+        int a = root->data;
+        if (root->left)
+            a += func(root->left->left) + func(root->left->right);
+        if (root->right)
+            a += func(root->right->left) + func(root->right->right);
+        
+        int b = 0;
+        b += func(root->left) + func(root->right);
+        
+        return mp[root] = max(a, b);
+    }
+    int getMaxSum(Node *root)  {
+        return func(root);
+    }
 };
-  int Solution::sumOfGrandChildren(Node* node, map<Node*, int>& mp)
-{
-    int sum = 0;
- 
-    //  call for children of left child only if it is not NULL
-    if (node->left)
-        sum += getMaxSumUtil(node->left->left, mp) +
-               getMaxSumUtil(node->left->right, mp);
- 
-    //  call for children of right child only if it is not NULL
-    if (node->right)
-        sum += Solution::getMaxSumUtil(node->right->left, mp) +
-               Solution::getMaxSumUtil(node->right->right, mp);
- 
-    return sum;
-}
- 
-//  Utility method to return maximum sum rooted at node 'node'
-int Solution::getMaxSumUtil(Node* node, map<struct Node*, int>& mp)
-{
-    if (node == NULL)
-        return 0;
- 
-    // If node is already processed then return calculated
-    // value from map
-    if (mp.find(node) != mp.end())
-        return mp[node];
- 
-    //  take current node value and call for all grand children
-    int incl = node->data + Solution::sumOfGrandChildren(node, mp);
- 
-    //  don't take current node value and call for all children
-    int excl = Solution::getMaxSumUtil(node->left, mp) +
-               Solution::getMaxSumUtil(node->right, mp);
- 
-    //  choose maximum from both above calls and store that in map
-    mp[node] = max(incl, excl);
- 
-    return mp[node];
-}
- 
-// Returns maximum sum from subset of nodes
-// of binary tree under given constraints
-int Solution::getMaxSum(Node* node)
-{
-    if (node == NULL)
-        return 0;
-    map<struct Node*, int> mp;
-    return Solution::getMaxSumUtil(node, mp);
-}
-// };
-// --
 
 
 
