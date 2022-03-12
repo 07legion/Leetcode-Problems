@@ -148,12 +148,13 @@ struct Node {
 using node = Node;
 int func(node* root) {
     if (!root) return 0;
-    if (root->right && root->right->left == root) return 0;
+    if (root->right && root->right->left == root) return 1;
     int l = func(root->left);
     int r = func(root->right);
     return max(l, r) + 1;
 }
 int findTreeHeight(Node* root) {
     int a = func(root);
-    return a+1;
+    // cout<<a<<"\n";
+    return a;
 }
