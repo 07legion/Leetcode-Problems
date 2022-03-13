@@ -12,7 +12,6 @@ class Solution{
 public:	
     
 	int count(int v[], int n, int x) {
-	   // x = 1;
         int low = 0, high = n - 1;
         int lb = -1;
         while(low <= high) {
