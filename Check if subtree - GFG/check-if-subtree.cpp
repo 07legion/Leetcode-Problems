@@ -97,18 +97,6 @@ struct Node
 using node = Node;
 class Solution {
   public:
-    void func(node* root, string& str) {
-        if (!root) return;
-        str += to_string(root->data);
-        func(root->left, str);
-        func(root->right, str);
-    }
-    // void f(node* root, string& str) {
-    //     if (!root) return;
-    //     f(root->left, str);
-    //     str += to_string(root->data);
-    //     f(root->right, str);
-    // }
     void f2(node* root, string& s) {
         if (!root) {
             s += ",#"; 
@@ -124,17 +112,6 @@ class Solution {
         if (root1 == NULL)
             return false;        
         string s1 = "", s2 = "";
-        // func(root1, s1);
-        // func(root2, s2);
-        // if (strstr(s1.c_str(), s2.c_str()) == NULL)
-        //     return false;
-        // s1 = "";
-        // s2 = "";
-        // f(root1, s1);
-        // f(root2, s2);
-        // if (strstr(s1.c_str(), s2.c_str()) == NULL)
-        //     return false;
-        // return true;
         f2(root1, s1);
         f2(root2, s2);        
         return (strstr(s1.c_str(), s2.c_str()) != NULL);        
