@@ -1,3 +1,51 @@
+// 1st Approach
+// class Solution {
+// public:
+//     string decodeString(string str) {   
+//         string ans = "";
+//         stack<string> st;
+//         for(int i=0;i<str.length();i++) {
+//             if (str[i] == ']') {
+//                 string temp = "";
+//                 while(!st.empty() && st.top() != "[") {
+//                     temp += st.top();
+//                     st.pop();
+//                 } 
+//                 reverse(temp.begin(), temp.end());
+//                 if (!st.empty() && st.top() == "[") {
+//                     st.pop();
+//                     string aint = "";
+//                     while(!st.empty() && st.top() != "" && st.top()[0] >= '0' && st.top()[0] <= '9') {
+//                         aint += st.top()[0];
+//                         st.pop();
+//                     }
+//                     reverse(aint.begin(), aint.end());
+//                     if (aint != "") {
+//                         int a = stoi(aint);
+//                         string gg = "";
+//                         for(int k=0;k<a;k++) {
+//                             gg += temp;
+//                         } 
+//                         for(auto it:gg) {
+//                             string h = "";
+//                             h += it; st.push(h);
+//                         }
+//                     }
+//                 }
+//             } else {
+//                 string t = "";
+//                 t += str[i];
+//                 st.push(t);
+//             }
+//         }
+//         vector<string> v;
+//         while(!st.empty()) ans += st.top(), st.pop();
+//         reverse(ans.begin(), ans.end());
+//         return ans;
+//     }
+// };
+
+// 2nd Approach
 class Solution {
 public:
     string decodeString(string str) {
