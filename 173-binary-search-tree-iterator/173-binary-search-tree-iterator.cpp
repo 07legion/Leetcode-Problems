@@ -12,24 +12,25 @@
 using node = TreeNode;
 class BSTIterator {
 private:
-    vector<node* > v;
-    int i;
+    stack<node* > st;
 public:
-    void func(node* root) {
-        if (!root) return;
-        func(root->left);
-        v.push_back(root);
-        func(root->right);
+    void setNext(node* root) {
+        while(root) {
+            st.push(root);
+            root = root->left;
+        }
     }
     BSTIterator(TreeNode* root) {
-        i = 0;
-        func(root);
-    }    
+        setNext(root);
+    }
     int next() {
-        return v[i++]->val;
+        node* temp = st.top();
+        st.pop();
+        setNext(temp->right);
+        return temp->val;
     }
     bool hasNext() {
-        return i < v.size();
+        return !st.empty();
     }
 };
 
