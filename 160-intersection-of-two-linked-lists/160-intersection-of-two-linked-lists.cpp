@@ -15,7 +15,8 @@ public:
         node* p1 = head1;
         node* p2 = head2;
         while(p1 != p2) {
-            if (p1 == NULL && p2 == NULL) return NULL;
+            if (p1 == NULL && p2 == NULL) 
+                return NULL;
             if (!p1) p1 = head2;
             else p1 = p1->next;
             if (!p2) p2 = head1;
