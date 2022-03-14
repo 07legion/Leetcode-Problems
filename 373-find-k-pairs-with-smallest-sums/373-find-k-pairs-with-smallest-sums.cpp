@@ -8,9 +8,8 @@ public:
 
         int n = v1.size(), m = v2.size();
         
-        for(int i=0;i<min(n, k);i++) {
+        for(int i=0;i<min(n, k);i++) 
             pq.push({v1[i] + v2[0], {i, 0}});
-        }
         
         while(!pq.empty() && k--) {
             
