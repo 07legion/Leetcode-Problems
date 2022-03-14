@@ -38,10 +38,6 @@ public:
         if (low < high) {
             int pivot = partition(nuts, low, high, bolts[high]);
             partition(bolts, low, high, nuts[pivot]);
-            // if (pivot < 0) {
-            // cout<<pivot<<"\n";
-            // return;
-            // }
             func(nuts, bolts, low, pivot-1);
             func(nuts, bolts, pivot+1, high);
         }
