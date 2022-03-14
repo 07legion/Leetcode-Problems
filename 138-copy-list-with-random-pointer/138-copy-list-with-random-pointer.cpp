@@ -21,25 +21,40 @@ private:
 public:
     Node* copyRandomList(Node* head) {
         if (!head) return head;
-        map<node*, node* > mp;
         node* ptr = head;
         node* ans = NULL;
+
         while(ptr) {
+            node* p = ptr->next;
             node* temp = new node(ptr->val);
-            if (!ans) ans = temp;
-            mp[ptr] = temp;
-            ptr = ptr->next;
+            temp->next = p;
+            ptr->next = temp;
+            ptr = p;
         }
         ptr = head;
-        while(ptr) {
-            if (mp.find(ptr->next) != mp.end())
-                mp[ptr]->next = mp[ptr->next];
-            else mp[ptr]->next = NULL;
-            if (mp.find(ptr->random) != mp.end())
-                mp[ptr]->random = mp[ptr->random];
-            else mp[ptr]->random = NULL;
-            ptr = ptr->next;
+        while(ptr && ptr->next) {
+            node* p = ptr->next; 
+            if (ptr->random)
+                p->random = ptr->random->next;
+            else p->random = NULL;
+            ptr = p->next;
         }
+        ptr = head;
+        node* prev = NULL;
+        while(ptr && ptr->next) {
+            node* p = ptr->next;
+            if (!ans) {
+                ans = p;
+                prev = p;
+            } else {
+                prev->next = p;
+                prev = p;
+            }
+            if (p) ptr->next = p->next;
+            else ptr->next = NULL;
+            ptr = p->next;
+        }
+        ptr = ans;
         return ans;
     }
 };
