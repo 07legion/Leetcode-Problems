@@ -1,2 +1,1 @@
-# Leetcode-Problems
-This repo contains the list of leetcode problems
+# Solving problems until I get my dream company! 
