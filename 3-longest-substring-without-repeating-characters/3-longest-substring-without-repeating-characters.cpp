@@ -9,7 +9,7 @@ public:
             if (mp.find(str[i]) != mp.end()) {
                 prev = max(prev, mp[str[i]] + 1);
             }
-            ans = max(ans, i - prev+1);
+            ans = max(ans, i - prev + 1);
             mp[str[i]] = i;
         }
         return max(0, ans);
