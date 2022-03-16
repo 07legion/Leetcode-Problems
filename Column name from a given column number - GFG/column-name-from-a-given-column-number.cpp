@@ -12,7 +12,9 @@ class Solution{
         while(n > 0) {
             if (n % 26 == 0) {
                 ans += 'Z';
+                n /= 26;
                 n--;
+                continue;
             }
             else ans += 'A' + ((n % 26)-1);
             n /= 26;
