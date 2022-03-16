@@ -1,16 +1,15 @@
 class Solution {
 public:
     int calculate(string str) {
-        str += '+';
+        // str += '+';
         stack<int> st;
         int ans = 0, ct = 0;
         char op = '+';
-        for(int i=0;i<str.length()+1;i++) {
+        for(int i=0;i<str.length();i++) {
             char ch = str[i];
-            if (ch == ' ') continue;
             if (isdigit(ch)) {
                 ct = (ct * 10) + (ch - '0');
-            } else {
+            } if (!isdigit(ch) && !iswspace(ch) || i == str.length() - 1) {
                 // cout<<op<<" ";
                 if (op == '+') st.push(ct);
                 else if (op == '-') st.push(-ct);
@@ -30,7 +29,7 @@ public:
                 ct = 0;
             }
         }
-        while(!st.empty()) {
+        while(st.size() != 0) {
             ans += st.top();
             st.pop();
         }
