@@ -12,12 +12,12 @@ class Solution{
         while(n > 0) {
             if (n % 26 == 0) {
                 ans += 'Z';
-                n--;                
-                n /= 26;
-                continue;
+                n = (n / 26) - 1;
             }
-            else ans += 'A' + ((n % 26)-1);
-            n /= 26;
+            else {
+                ans += 'A' + ((n % 26)-1);
+                n /= 26;
+            }
         }
         reverse(ans.begin(), ans.end());
         return ans;
