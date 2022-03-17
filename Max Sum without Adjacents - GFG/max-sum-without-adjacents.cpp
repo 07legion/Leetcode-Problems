@@ -8,6 +8,12 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:	
+    // int func(int i) {
+    //     if (i >= n) return 0;
+    //     if (dp[i] != -1) return dp[i];
+    //     return dp[i] = max(v[i] + func(i+2), func(i+1));
+    //     // return dp[i];
+    // }
 	int findMaxSum(int *v, int n) {
 	    if (n == 1) return v[0];
 	    if (n == 2) return max(v[0], v[1]);
