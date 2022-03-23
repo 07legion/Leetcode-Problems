@@ -14,35 +14,34 @@ public:
     ListNode* addTwoNumbers(ListNode* head1, ListNode* head2) {
         if (!head1) return head2;
         if (!head2) return head1;
-        node* ans = head1;
-        int carry = 0;
         node* ptr1 = head1;
         node* ptr2 = head2;
-        node* prev1 = NULL;
-        node* prev2 = NULL;
+        node* prev = NULL;
+        node* ans = head1;
+        int carry = 0;
         while(ptr1 && ptr2) {
             int temp = ptr1->val + ptr2->val + carry;
             ptr1->val = temp % 10;
             carry = temp / 10;
-            prev1 = ptr1;
-            prev2 = ptr2;
+            prev = ptr1;
             ptr1 = ptr1->next;
             ptr2 = ptr2->next;
         }
         if (!ptr1) {
-            if (prev1)
-                prev1->next = ptr2;
+            if (prev)
+               prev->next = ptr2;
         }
-        ptr1 = prev1->next;
+        // prev = prev->next;
+        ptr1 = prev->next;
         while(ptr1) {
-            int temp = ptr1->val + carry;
+            int temp = carry + ptr1->val;
             ptr1->val = temp % 10;
             carry = temp / 10;
-            prev1 = ptr1;
+            prev = ptr1;
             ptr1 = ptr1->next;
         }
         if (carry > 0) {
-            prev1->next = new ListNode(carry, NULL);
+            prev->next = new node(carry, NULL);
         }
         return ans;
     }
