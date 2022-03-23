@@ -13,8 +13,8 @@ class Solution {
         sort(v.begin(), v.end());
         int ans = 1;
         int limit = v[0].first;
-        for(int i=1;i<v.size();i++) {
-            if (limit < start[v[i].second]) {
+        for(int i=1;i<n;i++) {
+            if (start[v[i].second] > limit) {
                 ans++;
                 limit = v[i].first;
             }
