@@ -12,16 +12,18 @@ class Solution  {
     int celebrity(vector<vector<int> >& v, int n)  {
         int i = 0, j = n - 1;
         while(i < j) {
-            if (v[i][j]) i++; // i knows j
-            else j--; // j knows i
+            if (v[i][j]) {
+                // i knows j
+                i++;
+            } else j--; // j knows i
         }
-        int candidate = i;
-        for(i=0;i<n;i++) {
-            if (i == candidate) continue;
-            if (v[candidate][i]) return -1;
-            if (!v[i][candidate]) return -1;
+        int ans = i;
+        for(int i=0;i<n;i++) {
+            if (i == ans) continue;
+            if (v[ans][i]) return -1;
+            if (!v[i][ans]) return -1;
         }
-        return candidate;
+        return ans;
     }
 };
 
