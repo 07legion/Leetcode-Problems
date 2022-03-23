@@ -8,8 +8,8 @@ public:
         vis[u] = true;
         rec[u] = true;
         for(auto it:v[u]) {
-            if (!vis[it] && dfs(it)) return true;
-            else if (vis[it] && rec[it]) return true;
+            if (vis[it] && rec[it]) return true;
+            else if (!vis[it] && dfs(it)) return true;
         }
         rec[u] = false;
         st.push(u);
