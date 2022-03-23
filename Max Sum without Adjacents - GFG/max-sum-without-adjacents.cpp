@@ -17,13 +17,14 @@ public:
 	int findMaxSum(int *v, int n) {
 	    if (n == 1) return v[0];
 	    if (n == 2) return max(v[0], v[1]);
-	    int first = v[0], second = max(v[0], v[1]), ans = 0;
-	    for(int i=2;i<n;i++) {
-            ans = max(v[i] + first, second);
+        int ans = 0;
+        int first = v[0], second = max(v[0], v[1]);
+        for(int i=2;i<n;i++) {
+            ans = max(second, first + v[i]);
             first = second;
             second = ans;
-	    }
-	    return ans;
+        }
+        return ans;
 	}
 };
 
