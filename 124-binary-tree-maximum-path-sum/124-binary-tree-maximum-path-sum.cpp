@@ -18,10 +18,10 @@ private:
 public:
     int func(node* root) {
         if (!root) return 0;
-        int left = func(root->left);
-        int right = func(root->right);
-        mx = max({mx, root->val, root->val + left, root->val + right, left + right + root->val});
-        return max(left + root->val, max(right + root->val, root->val));
+        int a = func(root->left);
+        int b = func(root->right);
+        mx = max({mx, root->val, a + root->val, b + root->val, a + b + root->val});
+        return max({a + root->val, b + root->val, root->val});
     }
     int maxPathSum(TreeNode* root) {
         if(!root) return 0;
