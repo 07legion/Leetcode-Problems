@@ -24,21 +24,24 @@ public:
         return prev;
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
+        if (!head) return head;
+        if (k == 0) return head;
         node* ptr = head;
-        node* ans = NULL;
         node* prev = NULL;
+        node* ans = NULL;
         while(ptr) {
             for(int i=0;i<k;i++) {
                 if (!ptr) return ans;
                 ptr = ptr->next;
             }
-            node* kth = reverse(head, ptr);
-            if (!prev) prev = head;
-            else {
-                prev->next = kth;
+            node* newHead = reverse(head, ptr);
+            if (!prev) {
+                prev = head;
+            } else {
+                prev->next = newHead;
                 prev = head;
             }
-            if (!ans) ans = kth;
+            if (!ans) ans = newHead;
             head->next = ptr;
             head = ptr;
         }
@@ -49,4 +52,4 @@ public:
 
 // k = 3 
 // 3 -> 2 -> 1 -> 6 -> 5 -> 4 -> 7
-    
+   // n         h    p
