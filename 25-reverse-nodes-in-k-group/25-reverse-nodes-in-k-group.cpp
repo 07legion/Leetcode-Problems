@@ -13,13 +13,13 @@ using node = ListNode;
 class Solution {
 public:
     node* reverse(node* head, node* last) {
-        node* curr = head;
-        node* prev = head;
-        while(curr != last) {
-            node* temp = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = temp;
+        node* ptr = head;
+        node* prev = NULL;
+        while(ptr != last) {
+            node* temp = ptr->next;
+            ptr->next = prev;
+            prev = ptr;
+            ptr = temp;
         }
         return prev;
     }
