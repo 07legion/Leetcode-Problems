@@ -11,16 +11,28 @@
 using node = ListNode;
 class Solution {
 public:
+    node* func(node* head) {
+        node* ans;
+        if (head->next == NULL) {
+            ans = head;
+            return head;
+        }
+        ans = func(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return ans;
+    }
     ListNode* reverseList(ListNode* head) {
         if (!head) return head;
-        node* ptr = head;
-        node* prev = NULL;
-        while(ptr) {
-            node* temp = ptr->next;
-            ptr->next = prev;
-            prev = ptr;
-            ptr = temp;
-        }
-        return prev;
+        return func(head);
+        // node* ptr = head;
+        // node* prev = NULL;
+        // while(ptr) {
+        //     node* temp = ptr->next;
+        //     ptr->next = prev;
+        //     prev = ptr;
+        //     ptr = temp;
+        // }
+        // return prev;
     }
 };
