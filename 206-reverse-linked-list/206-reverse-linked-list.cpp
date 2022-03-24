@@ -12,12 +12,10 @@ using node = ListNode;
 class Solution {
 public:
     node* func(node* head) {
-        node* ans;
         if (head->next == NULL) {
-            ans = head;
             return head;
         }
-        ans = func(head->next);
+        node* ans = func(head->next);
         head->next->next = head;
         head->next = NULL;
         return ans;
