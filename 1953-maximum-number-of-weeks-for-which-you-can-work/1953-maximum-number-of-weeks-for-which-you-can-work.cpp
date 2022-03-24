@@ -1,15 +1,14 @@
-
+typedef long long int ll;
 class Solution {
 public:
     long long numberOfWeeks(vector<int>& v) {
-        int mx = *max_element(v.begin(), v.end());
-        long long int sm = 0;
-        for(int i=0;i<v.size();i++) sm += v[i];
-        if (sm - mx >= mx) {
-            return sm;
-        } 
-        return 2 * (sm - mx) + 1;
+        ll mx = INT_MIN, n = v.size(), sm = 0;
+        for(int i=0;i<n;i++) sm += v[i], mx = max(mx, ll(v[i]));
+        ll rest = sm - mx;
+        if (rest < mx)
+            return 2 * rest + 1;
+        else return sm;
     }
-};
+}; 
 
 
