@@ -17,8 +17,8 @@ public:
             s += ",#";
             return;
         }
-        f1(root->left, s);
         s += "," + to_string(root->val);
+        f1(root->left, s);
         f1(root->right, s);
     }
     void f2(node* root, string& s) {
