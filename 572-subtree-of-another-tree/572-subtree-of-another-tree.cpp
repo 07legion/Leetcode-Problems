@@ -38,12 +38,10 @@ public:
         string s1 = "", s2 = "";
         // f1(root1, s1);
         // f1(root2, s2);
-        // // cout<<s1<<" "<<s2<<"\n\n";
         // if (strstr(s1.c_str(), s2.c_str()) == NULL) return false;
         // s1 = ""; s2 = "";
         f2(root1, s1);
-        f2(root2, s2);        
-        // cout<<s1<<" "<<s2<<"\n\n";        
+        f2(root2, s2); 
         return (strstr(s1.c_str(), s2.c_str()) != NULL);
     }
 };
