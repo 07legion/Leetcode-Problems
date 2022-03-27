@@ -21,21 +21,33 @@ class Solution {
 public:
     Node* connect(Node* root) {
         if (!root) return root;
-        queue<node* > q;
-        q.push(root);
-        while(!q.empty()) {
-            int size = q.size();
-            node* prev = NULL;
-            while(size--) {
-                node* temp = q.front();
-                q.pop();
-                if (!prev) prev = temp;
-                else prev->next = temp, prev = temp;
-                if (temp->left) q.push(temp->left);
-                if (temp->right) q.push(temp->right);
+        node* leftmost = root;
+        while(leftmost) {
+            node* curr = leftmost;
+            node* pre = NULL;
+            leftmost = NULL;
+            
+            while(curr) {
+                if (curr->left) {
+                    if (!leftmost) leftmost = curr->left;
+                    if (!pre) pre = curr->left;
+                    else pre->next = curr->left, pre = pre->next;
+                }
+                if (curr->right) {
+                    if (!leftmost) leftmost = curr->right;
+                    if (!pre) pre = curr->right;
+                    else pre->next = curr->right, pre = pre->next;
+                }
+                curr = curr->next;
             }
-            prev->next = NULL;
         }
         return root;
     }
 };
+
+
+
+
+
+
+
