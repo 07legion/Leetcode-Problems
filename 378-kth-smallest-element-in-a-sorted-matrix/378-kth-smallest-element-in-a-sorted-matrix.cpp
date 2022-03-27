@@ -1,22 +1,30 @@
 class Solution {
 public:
-    int kthSmallest(vector<vector<int>>& v, int k) { 
-        priority_queue<pair<int, pair<int, int> >, vector<pair<int, pair<int, int> > > , greater<pair<int, pair<int, int> > > > pq;
-        
-        int n = v.size();
+    int func(int mid, int n, vector<vector<int> > v) {
+        int ct = 0;
         for(int i=0;i<n;i++) {
-            pq.push({v[i][0], {i, 0}});
+            if (v[i][0] > mid) break;
+            for(int j=0;j<n;j++) {
+                if (v[i][j] <= mid) 
+                    ct++;
+            }
         }
-        int a = 1;
-        while(!pq.empty()) {
-            int value = pq.top().first;
-            if (a == k) return value;
-            auto [i, j] = pq.top().second;
-            pq.pop();
-            if (j + 1 < n)
-                pq.push({v[i][j+1], {i, j+1}});
-            a++;
+        return ct;
+    }
+    int kthSmallest(vector<vector<int>>& v, int k) { 
+        int n = v.size();
+        int low = v[0][0], high = v[n-1][n-1];
+        int ans = -1;
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            int ct = func(mid, n, v);
+            if (ct < k) {
+                low = mid + 1;
+            } else {
+                ans = mid;
+                high = mid - 1;
+            }
         }
-        return -1;
+        return ans;
     }
 };
