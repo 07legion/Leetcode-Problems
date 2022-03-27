@@ -135,35 +135,29 @@ void inorder(Node *root)
 using node = Node;
 class Solution {
 public:
-void connect(node *root)
-    {
-       //Base condition
-       if(root==NULL)
-        return;
-       // Create an empty queue like level order traversal
-       queue<node*> q;
-       q.push(root);
-       while(!q.empty()){
-         // size indicates no. of nodes at current level
-           int size=q.size();
-         // for keeping track of previous node
-           node* prev=NULL;
-           while(size--){
-               node* temp=q.front();
-               q.pop();
-              
-               if(temp->left)
-                q.push(temp->left);
-              
-               if(temp->right)
-                q.push(temp->right);
-               
-               if(prev!=NULL)
-                prev->nextRight=temp;
-               prev=temp;
-           }
-           prev->nextRight=NULL;
-       }
+    void connect(Node* root) {
+        if (!root) return;
+        node* leftmost = root;
+        while(leftmost) {
+            node* curr = leftmost;
+            node* pre = NULL;
+            leftmost = NULL;
+            
+            while(curr) {
+                if (curr->left) {
+                    if (!leftmost) leftmost = curr->left;
+                    if (!pre) pre = curr->left;
+                    else pre->nextRight = curr->left, pre = pre->nextRight;
+                }
+                if (curr->right) {
+                    if (!leftmost) leftmost = curr->right;
+                    if (!pre) pre = curr->right;
+                    else pre->nextRight = curr->right, pre = pre->nextRight;
+                }
+                curr = curr->nextRight;
+            }
+        }
+        //return root;
     }
 };
 
