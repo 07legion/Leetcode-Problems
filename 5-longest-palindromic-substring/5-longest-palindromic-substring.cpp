@@ -8,7 +8,6 @@ public:
         if (i == j) return dp[i][j] = 1;
         if (dp[i][j] != -1) return dp[i][j];
         if (s[i] != s[j]) return dp[i][j] = INT_MIN;
-            // return 0;
         return dp[i][j] = 2 + func(i+1, j-1);
     }
     string longestPalindrome(string str) {
@@ -16,8 +15,6 @@ public:
         s = str;
         int start = -1, end = -1;
         memset(dp, -1, sizeof dp);
-        // cout<<func(0, 5)<<"\n";
-        // return "";
         for(int i=0;i<n;i++) {
             for(int j=i;j<n;j++) {
                 int a = func(i, j);
