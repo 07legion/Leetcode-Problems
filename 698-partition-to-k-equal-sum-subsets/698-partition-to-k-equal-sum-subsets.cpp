@@ -15,11 +15,8 @@ public:
         for(int j=i;j<v.size();j++) {
             if (!vis[j] && a + v[j] <= target) {
                 vis[j] = true;
-                bool res;
-                // if (a + v[j] == target) res = func(0, 0, level+1, target);
-                // else res = 
-                res = func(j+1, a + v[j], level, target);
-                if (res) return true;
+                if (func(j+1, a + v[j], level, target)) 
+                    return true;
                 vis[j] = false;
             }
         }
