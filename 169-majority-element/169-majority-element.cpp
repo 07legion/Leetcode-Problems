@@ -3,15 +3,18 @@ public:
     int majorityElement(vector<int>& v) {
         
         // [2,2,1,1,1,2,2]
-        int ct = 0, ans = -1;        
-        for(auto it:v) {
-            if (ct == 0) {
-                ans = it;
+        int candidate = 0, count = 0, n = v.size();
+        for(int i=0;i<n;i++) {
+            if (count == 0) {
+                candidate = v[i];
             }
-            if (it == ans)
-                ct += 1;
-            else ct -= 1;
+            if (candidate == v[i]) count++;
+            else count--;
         }
-        return ans;
+        count = 0;
+        for(int i=0;i<n;i++) {
+            if (v[i] == candidate) count++;
+        }
+        return count > n / 2 ? candidate : -1;
     }
 };
