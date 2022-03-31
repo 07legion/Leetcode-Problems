@@ -69,9 +69,7 @@ public:
                 high = mid - 1;
             } else if (cuts > m) {
                 low = mid + 1;
-            } //else if (cuts < m) {
-            //     high = mid - 1;
-            // }
+            }
         }
         return ans;
     }
