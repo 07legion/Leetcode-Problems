@@ -1,5 +1,5 @@
 # Power Set
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a string S find&nbsp;all possible subsequences&nbsp;of the string in lexicographically-sorted order.</span></p>
 
