@@ -8,29 +8,26 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+using node = ListNode;
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        ListNode* left = head;
-        ListNode* right = head;
-        ListNode* curr = head;
-        
-        int counter = 1;
-        while(curr!=NULL){
-            if (counter<k){
-                left = left->next;
-            }
-            if (counter>k){
-                right = right->next;
-            }
-            curr = curr->next;
-            counter++;
+        if (!head) return head;
+        if (k == 0) return head;
+        int i = 1;
+        node* ptr = head;
+        for(i=1;i<k;i++) {
+            ptr = ptr->next;
         }
-        //swap values
-        int temp = left->val;
-        left->val = right->val;
-        right->val = temp;
-        
+        node* slow = head;
+        node* fast = ptr;
+        while(fast->next) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        int temp = slow->val;
+        slow->val = ptr->val;
+        ptr->val = temp;
         return head;
     }
 };
