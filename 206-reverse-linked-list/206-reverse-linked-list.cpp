@@ -21,16 +21,15 @@ public:
     }
     ListNode* reverseList(ListNode* head) {
         if (!head) return head;
-        return func(head);
-        
-        // node* ptr = head;
-        // node* prev = NULL;
-        // while(ptr) {
-        //     node* temp = ptr->next;
-        //     ptr->next = prev;
-        //     prev = ptr;
-        //     ptr = temp;
-        // }
-        // return prev;
+        // return func(head);
+        node* ptr = head;
+        node* prev = NULL;
+        while(ptr) {
+            node* temp = ptr->next;
+            ptr->next = prev;
+            prev = ptr;
+            ptr = temp;
+        }
+        return prev;
     }
 };
