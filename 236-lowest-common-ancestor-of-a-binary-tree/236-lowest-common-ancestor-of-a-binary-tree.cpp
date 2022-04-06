@@ -33,12 +33,13 @@ public:
 //         return false;
 //     }
     node* func(node* root, node* p, node* q) {
-        if (!root || p == root || q == root) return root;
-        node* left = func(root->left, p, q);
-        node* right = func(root->right, p, q);
-        if (left == NULL) return right;
-        else if (right == NULL) return left;
-        else return root;
+        if (!root) return root;
+        if (p == root || q == root) return root;
+        node* leftNode = func(root->left, p, q);
+        node* rightNode = func(root->right, p, q);
+        if (!leftNode) return rightNode;
+        else if (!rightNode) return leftNode;
+        return root;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         ans = NULL;
