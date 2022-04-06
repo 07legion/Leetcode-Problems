@@ -9,41 +9,37 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+using node = TreeNode;
 class Solution {
 public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        stack<pair<TreeNode*, int> > st1; 
-        stack<pair<TreeNode*, int> > st2;
-        vector<vector<int> > res;
-        if (!root) 
-            return res;
-        st1.push({root, 0});
+    vector<vector<int> > zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int> > ans;
+        if (!root) return ans;
+        stack<node* > st1, st2;
+        st1.push(root);
         int i = 0;
         while(!st1.empty() || !st2.empty()) {
             vector<int> temp;
-            if (i % 2) {
-                while(!st2.empty()) {
-                    temp.push_back(st2.top().first->val);
-                    if (st2.top().first->right)
-                        st1.push({st2.top().first->right, st2.top().second + 1});
-                    if (st2.top().first->left)
-                        st1.push({st2.top().first->left, st2.top().second + 1});
-                    st2.pop();
-                }
-            } else {
+            if (i % 2 == 0) {
+                // left to right
                 while(!st1.empty()) {
-                    temp.push_back(st1.top().first->val);
-                    if (st1.top().first->left) {
-                        st2.push({st1.top().first->left, st1.top().second + 1});
-                    }
-                    if (st1.top().first->right)
-                        st2.push({st1.top().first->right, st1.top().second + 1});
+                    temp.push_back(st1.top()->val);
+                    if (st1.top()->left) st2.push(st1.top()->left);
+                    if (st1.top()->right) st2.push(st1.top()->right);
                     st1.pop();
                 }
+            } else {
+                // right to left
+                while(!st2.empty()) {
+                    temp.push_back(st2.top()->val);
+                    if (st2.top()->right) st1.push(st2.top()->right);
+                    if (st2.top()->left) st1.push(st2.top()->left);
+                    st2.pop();
+                }
             }
+            ans.push_back(temp);
             i++;
-            res.push_back(temp);
         }
-        return res;
+        return ans;
     }
 };
