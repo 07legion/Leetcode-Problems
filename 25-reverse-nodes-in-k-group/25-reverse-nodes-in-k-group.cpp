@@ -34,10 +34,19 @@ public:
                 if (!ptr) return ans;
                 ptr = ptr->next;
             }
+            // node* newHead = reverse(head, ptr);
+            // if (!prev) {
+            //     prev = head;
+            // } else {
+            //     prev->next = newHead;
+            //     prev = head;
+            // }
+            // if (!ans) ans = newHead;
+            // head->next = ptr;
+            // head = ptr;
             node* newHead = reverse(head, ptr);
-            if (!prev) {
-                prev = head;
-            } else {
+            if (!prev) prev = head;
+            else {
                 prev->next = newHead;
                 prev = head;
             }
