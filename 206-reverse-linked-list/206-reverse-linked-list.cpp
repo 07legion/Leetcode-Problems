@@ -10,11 +10,10 @@
  */
 using node = ListNode;
 class Solution {
-public:
+public:    
     node* func(node* head) {
-        if (head->next == NULL) {
+        if (head->next == NULL) 
             return head;
-        }
         node* ans = func(head->next);
         head->next->next = head;
         head->next = NULL;
@@ -23,6 +22,7 @@ public:
     ListNode* reverseList(ListNode* head) {
         if (!head) return head;
         return func(head);
+        
         // node* ptr = head;
         // node* prev = NULL;
         // while(ptr) {
