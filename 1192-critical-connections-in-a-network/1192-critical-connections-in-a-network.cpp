@@ -11,8 +11,8 @@ public:
         
         int mn = INT_MAX;
         for(auto it:v[u]) {
-            // if (it == parent) continue;
-            if (labels[it] == labels[u]-1) continue;
+            if (it == parent) continue;
+            // if (labels[it] == labels[u]-1) continue;
             int recLabel = dfs(it, u, labels[u]);
             if (labels[u] >= recLabel) {
                 st.erase({min(u, it), max(u, it)});
