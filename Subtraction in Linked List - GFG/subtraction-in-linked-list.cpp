@@ -176,9 +176,6 @@ Node* subLinkedList(Node* head1, Node*head2) {
     else if (n == m && compare(head1, head2)) {
         swap(head1, head2);
     }
-    // if (debug) {
-    //     cout<<head1->data<<" "<<head2->data<<'\n';
-    // }
     head1 = reverse(head1);
     head2 = reverse(head2);
     
