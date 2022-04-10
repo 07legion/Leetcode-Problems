@@ -31,10 +31,6 @@ public:
         }
         int ans = 0;
         for(int i=0;i<n;i++) {
-            int a = 0;
-            // a += abs(nsl[i].second - i) * v[i];
-            // a += abs(i - nsr[i].second) * v[i];
-            // a -= v[i];
             ans = max(ans, abs(nsr[i].second - nsl[i].second - 1) * v[i]);
         }
         return ans;
