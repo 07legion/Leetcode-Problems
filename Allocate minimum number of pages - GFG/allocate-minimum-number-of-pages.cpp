@@ -21,11 +21,9 @@ public:
             } else {
                 sm = v[i];
                 ct++;
-                if (ct > m) return false;
             }
         }
-        // return ct <= m;
-        return true;
+        return ct <= m;
     }
     int findPages(int v[], int N, int M)  {
         n = N; m = M;
