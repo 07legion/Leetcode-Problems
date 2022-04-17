@@ -12,7 +12,7 @@
 using node = ListNode;
 class Solution {
 public:
-    node* reverse(node* head, node* last) {
+    ListNode* reverseNodes(ListNode* head, ListNode* last) {
         node* ptr = head;
         node* prev = NULL;
         while(ptr != last) {
@@ -24,33 +24,23 @@ public:
         return prev;
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
-        if (!head) return head;
-        if (k == 0) return head;
+        if (!head || !k) return head;
         node* ptr = head;
-        node* prev = NULL;
         node* ans = NULL;
+        node* prev = NULL;
         while(ptr) {
             for(int i=0;i<k;i++) {
                 if (!ptr) return ans;
                 ptr = ptr->next;
             }
-            // node* newHead = reverse(head, ptr);
-            // if (!prev) {
-            //     prev = head;
-            // } else {
-            //     prev->next = newHead;
-            //     prev = head;
-            // }
-            // if (!ans) ans = newHead;
-            // head->next = ptr;
-            // head = ptr;
-            node* newHead = reverse(head, ptr);
-            if (!prev) prev = head;
-            else {
+            node* newHead = reverseNodes(head, ptr);
+            if (!ans) ans = newHead;
+            if (!prev) {
+                prev = head;
+            } else {
                 prev->next = newHead;
                 prev = head;
             }
-            if (!ans) ans = newHead;
             head->next = ptr;
             head = ptr;
         }
