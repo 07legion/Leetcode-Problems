@@ -15,19 +15,19 @@ public:
         //     }
         // }
         // return ans.size();
-        int n = v.size();
-        vector<int> lis(n, 0);
+        int n = v.size();        
+        vector<int> lis(n);
         lis[0] = 1;
-        int mx = INT_MIN;
         for(int i=1;i<n;i++) {
             lis[i] = 1;
             for(int j=0;j<i;j++) {
-                if (v[j] < v[i] && lis[i] < lis[j] + 1) {
+                if (v[i] > v[j] && lis[i] < lis[j] + 1) {
                     lis[i] = lis[j] + 1;
                 }
             }
         }
-        for(int i=0;i<n;i++) mx = max(mx, lis[i]);
+        int mx = INT_MIN;
+        for(auto it:lis) mx = max(mx, it);
         return mx;
     }
 };
