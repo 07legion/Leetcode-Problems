@@ -1,41 +1,41 @@
 class Solution {
 private:
-    vector<int> v[201];
-    vector<bool> vis;
+    vector<int> parent, ran;
 public:
-    void dfs(int u) {
-        vis[u] = true;
-        for(auto it:v[u]) {
-            if (vis[it]) continue;
-            dfs(it);
+    void makeSet(int u) {
+        parent[u] = u;
+        ran[u] = 0;
+    }
+    int findSet(int u) {
+        if (parent[u] == u) return u;
+        return findSet(parent[u]);
+    }
+    void unionSet(int u, int v) {
+        u = findSet(u);
+        v = findSet(v);
+        if (u != v) {
+            if (ran[u] < ran[v]) swap(u, v);
+            parent[v] = u;
+            if (ran[u] == ran[v]) ran[u]++;
         }
     }
+    
     int findCircleNum(vector<vector<int>>& isConnected) {
-        // i, j
-        for(int i=0;i<isConnected.size();i++) {
-            for(int j=0;j<isConnected[i].size();j++) {
-                if (i == j) continue;
-                if (isConnected[i][j] == 1) {
-                    v[i].push_back(j);
-                    v[j].push_back(i);
+        int n = isConnected.size();
+        ran.resize(n+1, 0);
+        parent.resize(n+1, 0);
+        for(int i=0;i<n;i++) makeSet(i);
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                if (isConnected[i][j]) {
+                    unionSet(i, j);
                 }
             }
         }
-        int ct = 0;
-        vis.resize(isConnected.size()+1, false);
-        for(int i=0;i<isConnected.size();i++) {
-            if (!vis[i]) {
-                dfs(i);
-                ct++;
-            }
-        }
-        return ct;
+        set<int> st;
+        for(int i=0;i<n;i++) st.insert(findSet(i));
+        return st.size();
     }
 };
-
-//   1 2 3
-// 1 1 1 0
-// 2 1 1 0
-// 3 0 0 1
 
 
