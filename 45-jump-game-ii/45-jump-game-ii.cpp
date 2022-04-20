@@ -1,17 +1,15 @@
 class Solution {
 public:
     int jump(vector<int>& v) {
-        if (v.size() == 1) return 0;
         int n = v.size();
-        int l = 0, r = 0, ans = 0;
-        while(r < n-1) {
-            int farthest = 0;
-            for(int j=l;j<=r;j++) 
-                farthest = max(farthest, j + v[j]);
-            l = r + 1;
-            r = farthest;
-            ans++;
+        int i = 0, j = 0, ct = 0;
+        while(j < n-1) {
+            int mx = INT_MIN;
+            for(int p=i;p<=j;p++) mx = max(p + v[p], mx);
+            i = j+1;
+            j = mx;
+            ct++;
         }
-        return ans;
+        return ct;
     }
 };
