@@ -12,7 +12,6 @@ public:
             if (it == u) continue;
             if (!vis[it]) ct++;
         }
-        // cout<<u<<" "<<tim<<" "<<ct<<"\n";
         if (target == u) {
             if (tim == t || (ct == 0 && tim < t)) {
                 ans = p;
