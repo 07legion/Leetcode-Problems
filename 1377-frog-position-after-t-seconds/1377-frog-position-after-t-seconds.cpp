@@ -3,9 +3,8 @@ private:
     vector<int> v[101];
     vector<bool> vis;
     int n, t, target;
-    double ans;
 public:
-    void dfs(int u, int tim, double p) {
+    void dfs(int u, int tim, double p, double &ans) {
         vis[u] = true;
         int ct = 0;
         for(auto it:v[u]) {
@@ -20,7 +19,7 @@ public:
         }
         for(auto it:v[u]) {
             if (vis[it]) continue;
-            dfs(it, tim + 1, ((p == 0) ? 1.0 / ct : p * (1.0 / ct)));
+            dfs(it, tim + 1, ((p == 0) ? 1.0 / ct : p * (1.0 / ct)), ans);
         }
     }
     double frogPosition(int N, vector<vector<int>>& edges, int T, int Tar) {
@@ -31,8 +30,8 @@ public:
         }
         if (edges.size() == 0) return 1.00000;
         vis.resize(n+1, false);
-        ans = 0;
-        dfs(1, 0, 0.0);
+        double ans = 0.0;
+        dfs(1, 0, 0.0, ans);
         return ans;
     }
 };
