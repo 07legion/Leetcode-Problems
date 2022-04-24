@@ -23,20 +23,27 @@ public:
         if (!root) return root;
         node* leftmost = root;
         while(leftmost) {
+            node* prev = NULL;
             node* curr = leftmost;
-            node* pre = NULL;
-            leftmost = NULL;
-            
+            leftmost = NULL;            
             while(curr) {
                 if (curr->left) {
-                    if (!leftmost) leftmost = curr->left;
-                    if (!pre) pre = curr->left;
-                    else pre->next = curr->left, pre = pre->next;
+                    if (!prev) {
+                        leftmost = curr->left;
+                        prev = curr->left;
+                    } else {
+                        prev->next = curr->left;
+                        prev = curr->left;
+                    }
                 }
                 if (curr->right) {
-                    if (!leftmost) leftmost = curr->right;
-                    if (!pre) pre = curr->right;
-                    else pre->next = curr->right, pre = pre->next;
+                    if (!prev) {
+                        leftmost = curr->right;
+                        prev = curr->right;
+                    } else {
+                        prev->next = curr->right;
+                        prev = curr->right;
+                    }
                 }
                 curr = curr->next;
             }
@@ -44,10 +51,3 @@ public:
         return root;
     }
 };
-
-
-
-
-
-
-
