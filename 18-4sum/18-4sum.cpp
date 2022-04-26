@@ -9,12 +9,12 @@ public:
             for(int j=i+1;j<n;j++) {
                 if (j > i+1 && v[j] == v[j-1]) continue;
                 int low = j+1, high = n-1;
-                int t = target - v[i] - v[j];                
+                int t = target - v[i] - v[j];
                 while(low < high) {
                     if (v[low] + v[high] == t) {
                         ans.push_back({v[i], v[j], v[low], v[high]});
-                        while(low < high && low + 1 < n && v[low] == v[low+1]) low++;
-                        while(low < high && high-1 >= 0 && v[high] == v[high-1]) high--; 
+                        while(low + 1 < high && v[low] == v[low+1]) low++;
+                        while(high - 1 >= low && v[high] == v[high-1]) high--; 
                         low++;
                         high--;
                     } else if (v[low] + v[high] < t) low++;
