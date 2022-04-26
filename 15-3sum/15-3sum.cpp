@@ -10,8 +10,8 @@ public:
             while(low < high) {
                 if (v[low] + v[high] + v[i] == 0) {
                     ans.push_back({v[i], v[low], v[high]});
-                    while(low + 1 < n && v[low] == v[low + 1]) low++;
-                    while(high - 1 >= 0 && v[high] == v[high-1]) high--;
+                    while(low + 1 <= high && v[low] == v[low + 1]) low++;
+                    while(high - 1 >= low && v[high] == v[high-1]) high--;
                     low++; high--;
                 }
                 else if (v[low] + v[high] + v[i] < 0) low++;
