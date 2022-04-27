@@ -1,22 +1,21 @@
-    class node {
-        public:
-            int key;
-            int val;
-            node* next;
-            node* prev;
-        node(int _key, int _val) {
-            key = _key;
-            val = _val; 
-        }
-    };
-class LRUCache {
-public:
-
-    
+class node {
+    public:
+        int key;
+        int val;
+        node* next;
+        node* prev;
+    node(int _key, int _val) {
+        key = _key;
+        val = _val; 
+    }
+};
+class LRUCache {    
+private:
     node* head = new node(-1,-1);
     node* tail = new node(-1,-1);
     int cap;
     unordered_map<int, node*>mp;
+public:
     
     LRUCache(int capacity) {
         cap = capacity;    
