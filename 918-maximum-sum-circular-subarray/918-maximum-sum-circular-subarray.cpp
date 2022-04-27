@@ -22,11 +22,9 @@ public:
             mx = max(mx, curr_sum);
         }
         int a = mx - sm;
-        for(int i=0;i<n;i++) {
-            v[i] *= -1;
-        }
         curr_sum = 0; mx = INT_MIN;
         for(int i=0;i<n;i++) {
+            v[i] *= -1;
             if (curr_sum + v[i] >= v[i]) {
                 curr_sum += v[i];
             } else curr_sum = v[i];
