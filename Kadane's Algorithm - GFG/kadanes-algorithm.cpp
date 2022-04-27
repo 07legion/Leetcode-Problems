@@ -8,10 +8,16 @@ class Solution {
     public:
     long long maxSubarraySum(int v[], int n){
         int mx = INT_MIN, curr = 0;
+        int start = 0 , end = 0, s = 0;
         for(int i=0;i<n;i++) {
             if (curr + v[i] >= v[i]) {
                 curr += v[i];
-            } else curr = v[i];
+                start = s;
+                end = i;
+            } else {
+                curr = v[i];
+                s = i + 1;
+            }
             mx = max(mx, curr);
         }
         return mx;
