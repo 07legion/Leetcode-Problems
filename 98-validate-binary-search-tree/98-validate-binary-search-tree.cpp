@@ -27,13 +27,6 @@ public:
         bool b = func(root->right, prev);
         return a && b;
     }
-    // bool validate(TreeNode* node, TreeNode* &prev) {
-    //     if (node == NULL) return true;
-    //     if (!validate(node->left, prev)) return false;
-    //     if (prev != NULL && prev->val >= node->val) return false;
-    //     prev = node;
-    //     return validate(node->right, prev);
-    // }
     bool isValidBST(TreeNode* root) { 
         node* prev = NULL;
         return func(root, prev);
