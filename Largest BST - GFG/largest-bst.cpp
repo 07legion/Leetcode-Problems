@@ -115,13 +115,15 @@ public:
         info r = func(root->right);
         info ret;
         ret.sizeOfSubtree = 1 + l.sizeOfSubtree + r.sizeOfSubtree;        
+        bool flag = false;
         if (root->data > l.mx && root->data < r.mn && l.isBst && r.isBst) {
             ret.ans = ret.sizeOfSubtree;
-            ret.mn = min({ll(root->data), l.mn, r.mn});
-            ret.mx = max({ll(root->data), l.mx, r.mx});            
             ret.isBst = true;
-            return ret;
+            flag = true;
         }
+        ret.mn = min({ll(root->data), l.mn, r.mn});
+        ret.mx = max({ll(root->data), l.mx, r.mx});                    
+        if (flag) return ret;
         ret.ans = max(l.ans, r.ans);
         ret.isBst = false;
         return ret;
