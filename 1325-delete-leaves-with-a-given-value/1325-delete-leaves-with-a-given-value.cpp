@@ -15,27 +15,30 @@ private:
     int target;
     bool flag;
 public:
-    void func(node* root, node* parent, char ch) {
-        if (!root) return;
-        func(root->left, root, 'l');
-        func(root->right, root, 'r');
-        if (root && !root->left && !root->right && root->val == target) {
-            if (!parent) {
-                root = NULL;
-                flag = true;
-            }
-            else {
-                if (ch == 'l') parent->left = NULL;
-                else if (ch == 'r') parent->right = NULL;
-            }
-        }
-    }
+    // void func(node* root, node* parent, char ch) {
+    //     if (!root) return;
+    //     func(root->left, root, 'l');
+    //     func(root->right, root, 'r');
+    //     if (root && !root->left && !root->right && root->val == target) {
+    //         if (!parent) {
+    //             root = NULL;
+    //             flag = true;
+    //         }
+    //         else {
+    //             if (ch == 'l') parent->left = NULL;
+    //             else if (ch == 'r') parent->right = NULL;
+    //         }
+    //     }
+    // }
     TreeNode* removeLeafNodes(TreeNode* root, int t) {
-        if (!root) return root;
-        target = t;
-        flag = false;
-        func(root, NULL, ' ');
-        if (flag) return NULL;
-        return root;
+        if (root->left) root->left = removeLeafNodes(root->left, t);
+        if (root->right) root->right = removeLeafNodes(root->right, t);        
+        return root->left == root->right && root->val == t ? NULL : root;
+        // if (!root) return root;
+        // target = t;
+        // flag = false;
+        // func(root, NULL, ' ');
+        // if (flag) return NULL;
+        // return root;
     }
 };
