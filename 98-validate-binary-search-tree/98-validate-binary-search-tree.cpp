@@ -16,11 +16,10 @@ class Solution {
 public:
     bool func(node* root, ll mn, ll mx) {
         if (!root) return true;
-        return (root->val > mn && root->val < mx) &&
-            func(root->left, mn, root->val) &&
+        return root->val > mn && root->val < mx && func(root->left, mn, root->val) && 
             func(root->right, root->val, mx);
     }
-    bool isValidBST(TreeNode* root) {
+    bool isValidBST(TreeNode* root) { 
         return func(root, LLONG_MIN, LLONG_MAX);
     }
 };
