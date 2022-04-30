@@ -1,36 +1,25 @@
 class Solution {
 public:
     int firstMissingPositive(vector<int>& v) {
-        set<int> st(v.begin(), v.end());
-        int j = 0;
-        for(auto it:st) v[j++] = it;
-        if (v.size() == 1) {
-            if (v[0] == 1) return 2;
-            return 1;
-        }
-        int ans = -1;
-        if (v[0] > 0 && v[0] != 1) return 1;
-        
-        bool flag = false;
-        for(int i=0;i<v.size();i++) {
-            if (v[i] == 1) {
-                flag = true;
-                break;
+        int n = v.size();
+        for(int i = 0; i < n; i++) {
+            int j = i;
+            while(v[j] >= 1 && v[j] <= n && v[v[j] - 1] != v[j]) {
+                swap(v[v[j]-1], v[j]);
             }
+        }   
+        for(int i=0;i<n;i++) {
+            if (v[i] != i+1) return i+1;
         }
-        if (!flag) return 1;
-        for(int i=0;i<v.size() - 1;i++) {
-            if (v[i+1] - v[i] != 1) {
-                if (v[i] + 1 <= 0) continue;
-                ans = v[i] + 1; break;
-            }
-        }
-        if (ans == -1) {
-            if (v.back() + 1 <= 0) return 1;
-            return v.back() + 1;
-        }
-        return ans;
+        return n+1;
     }
 };
 
-// -2, -1
+
+// 3 4 -1 1
+// 1 2  3 4
+// 0 1  2 3
+
+
+
+    
