@@ -8,15 +8,22 @@ public:
             ans.push_back(temp);
             return;
         }
-        for(int j=0;j<v.size();j++) {
-            if (!vis[j]) {
-                vis[j] = true;
-                temp.push_back(v[j]);
-                func(i+1, temp);
-                temp.pop_back();
-                vis[j] = false;
-            }
+        for(int j=i;j<v.size();j++) {
+            swap(v[i], v[j]);
+            temp.push_back(v[i]);
+            func(i+1, temp);
+            temp.pop_back();            
+            swap(v[i], v[j]);            
         }
+        // for(int j=0;j<v.size();j++) {
+        //     if (!vis[j]) {
+        //         vis[j] = true;
+        //         temp.push_back(v[j]);
+        //         func(i+1, temp);
+        //         temp.pop_back();
+        //         vis[j] = false;
+        //     }
+        // }
     }
     vector<vector<int>> permute(vector<int>& V) {
         v = V;
