@@ -1,31 +1,36 @@
 class Solution {
 private:
-    vector<int> v[100007];
-    vector<bool> vis;
-    vector<bool> rec;
+    vector<int> adj[2001];
+    vector<bool> vis, rec;
+    int n;
 public:
     bool dfs(int u) {
         vis[u] = true;
         rec[u] = true;
-        for(auto it:v[u]) {
+        for(auto it:adj[u]) {
             if (vis[it] && rec[it]) return true;
-            if (!vis[it] && dfs(it)) return true;
+            else if (!vis[it] && dfs(it)) return true;
         }
         rec[u] = false;
         return false;
     }
-    bool canFinish(int n, vector<vector<int>>& p) {
+    bool canFinish(int N, vector<vector<int>>& p) {
+        n = N;
         for(int i=0;i<p.size();i++) {
-            int a = p[i][0], b = p[i][1];
-            v[b].push_back(a);
+            adj[p[i][1]].push_back(p[i][0]);
         }
-        vis.resize(n, false);
-        rec.resize(n, false);        
-        bool a = false;
+        vis.resize(n+1, false);
+        rec.resize(n+1, false);        
+        bool isCycle = false;
         for(int i=0;i<n;i++) {
-            if (!vis[i])
-                a |= dfs(i);
+            if (!vis[i]) {
+                isCycle |= dfs(i);
+            }
         }
-        return !a;
+        if (isCycle) return false;
+        for(int i=0;i<n;i++) {
+            if (!vis[i]) return false;
+        }
+        return true;
     }
 };
