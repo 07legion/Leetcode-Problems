@@ -22,18 +22,18 @@ public:
 using node = Node;
 class Solution {
 private:
-    map<node* , node*> mp;
+    map<node* , node* > mp;
 public:
-    void func(node* u) {
-        // mp[u] = new node(u->val);
-        for(auto it : u->neighbors) {
+    void func(node* root) {
+        if (!root) return;
+        for(auto it:root->neighbors) {
             if (mp.find(it) != mp.end()) {
-                mp[u]->neighbors.push_back(mp[it]);
+                mp[root]->neighbors.push_back(mp[it]);
                 continue;
             }
             node* temp = new node(it->val);
             mp[it] = temp;
-            mp[u]->neighbors.push_back(temp);
+            mp[root]->neighbors.push_back(temp);
             func(it);
         }
     }
@@ -44,15 +44,3 @@ public:
         return mp[root];
     }
 };
-
-
-
-// 1: 2, 4
-// 2: 1, 3
-// 3: 2, 4
-// 4: 1, 3
-    
-// 1 --- 2      
-// |     |
-// |     |
-// 4 --- 3
