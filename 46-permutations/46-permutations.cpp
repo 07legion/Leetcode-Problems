@@ -12,7 +12,7 @@ public:
             swap(v[i], v[j]);
             temp.push_back(v[i]);
             func(i+1, temp);
-            temp.pop_back();            
+            temp.pop_back();
             swap(v[i], v[j]);            
         }
         // for(int j=0;j<v.size();j++) {
