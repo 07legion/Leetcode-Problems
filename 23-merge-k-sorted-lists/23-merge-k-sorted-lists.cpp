@@ -13,46 +13,52 @@ using node = ListNode;
 
 class Solution {
 public:
-    node* merge(node* head1, node* head2) {
+    ListNode* merge(ListNode* head1, ListNode* head2) {
         if (!head1) return head2;
         if (!head2) return head1;
+        if (head2->val < head1->val) swap(head1, head2);
+        node* prev = NULL;
         node* ptr1 = head1;
         node* ptr2 = head2;
-        if (ptr2->val < ptr1->val) swap(ptr1, ptr2);
-        node* prev = NULL;
-        node* ans = NULL;
-        while(ptr1 || ptr2) {
-            if (!ptr1) {
-                prev->next = ptr2;
-                break;
-            }
-            if (!ptr2) {
-                break;
-            }
+        while(ptr1 && ptr2) {
             if (ptr1->val <= ptr2->val) {
-                if (!ans) ans = ptr1;
-                prev = ptr1;
+                if (!prev) prev = ptr1;
+                else {
+                    prev->next = ptr1; 
+                    prev = ptr1;
+                }
                 ptr1 = ptr1->next;
             } else {
-                prev->next = ptr2;
-                prev = ptr2;
+                if (!prev) prev = ptr2;
+                else {
+                    prev->next = ptr2;
+                    prev = ptr2;
+                }
                 ptr2 = ptr2->next;
-                prev->next = ptr1;
             }
         }
-        return ans;
-    }
+        while(ptr1) {
+            prev->next = ptr1;
+            prev = ptr1;
+            ptr1 = ptr1->next;
+        }
+        while(ptr2) {
+            prev->next = ptr2;
+            prev = ptr2;
+            ptr2 = ptr2->next;
+        }
+        return head1;
+    }    
     ListNode* mergeKLists(vector<ListNode*>& v) {
         if (!v.size()) return NULL;
         int n = v.size();
-        int temp = n;
-        while(temp > 1) {
-            int i = 0, j = temp-1, l = 0;
+        while(n > 1) {
+            int i = 0, j = n-1;
             while(i < j) {
-                v[l++] = merge(v[i++], v[j--]);
+                v[i] = merge(v[i], v[j]);
+                i++; j--;
             }
-            // temp = (temp % 2 ? 1 + temp / 2 : temp / 2);
-            temp = (temp + 1) / 2;
+            n = (n + 1) / 2;
         }
         return v[0];
     }
