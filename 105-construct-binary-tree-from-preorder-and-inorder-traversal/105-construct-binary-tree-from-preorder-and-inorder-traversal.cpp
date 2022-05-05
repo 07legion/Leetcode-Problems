@@ -13,24 +13,21 @@
 using node = TreeNode;
 class Solution {
 private:
-    unordered_map<int, int> mp;
     vector<int> pre, in;
-    int n, a;
+    map<int, int> mp;
 public:
-    node* func(int start, int end) {
-        if (start > end) return NULL;
-        node* root = new node();
-        int val = pre[a++];
-        root->val = val;
-        root->left = func(start, mp[val]-1);
-        root->right = func(mp[val]+1, end);
+    node* func(int& i, int start, int end) {
+        if (i == pre.size() || start > end) return NULL;
+        int rootVal = pre[i++];
+        node* root = new node(rootVal);
+        root->left = func(i, start, mp[rootVal]-1);
+        root->right = func(i, mp[rootVal]+1, end);
         return root;
     }
     TreeNode* buildTree(vector<int>& pre1, vector<int>& in1) {
-        in = in1; pre = pre1;
-        n = in.size();
-        a = 0;
-        for(int i=0;i<n;i++) mp[in[i]] = i;
-        return func(0, n-1);
+        pre = pre1; in = in1;
+        for(int i=0;i<in.size();i++) mp[in[i]] = i;
+        int i = 0;
+        return func(i, 0, in.size()-1);
     }
 };
