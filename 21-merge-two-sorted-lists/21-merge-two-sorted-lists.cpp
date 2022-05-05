@@ -11,31 +11,40 @@
 using node = ListNode;
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* h1, ListNode* h2) {
-        if (!h1) return h2;
-        if (!h2) return h1;
-        if (h1->val > h2->val) swap(h1, h2);
-        node* head = h1;
-        node* prev = h1;
-        while(h1 || h2) {
-            if (h1 && !h2) {
-                break;
-            }
-            if (!h1 && h2) {
-                prev->next = h2;
-                break;
-            }
-            if (h1->val <= h2->val) {
-                prev = h1;
-                h1 = h1->next;
+    ListNode* mergeTwoLists(ListNode* head1, ListNode* head2) {
+        if (!head1) return head2;
+        if (!head2) return head1;
+        if (head2->val < head1->val) swap(head1, head2);
+        node* prev = NULL;
+        node* ptr1 = head1;
+        node* ptr2 = head2;
+        while(ptr1 && ptr2) {
+            if (ptr1->val <= ptr2->val) {
+                if (!prev) prev = ptr1;
+                else {
+                    prev->next = ptr1; 
+                    prev = ptr1;
+                }
+                ptr1 = ptr1->next;
             } else {
-                prev->next = h2;
-                prev = h2;
-                node* temp = h2->next;
-                prev->next = h1;
-                h2 = temp;
+                if (!prev) prev = ptr2;
+                else {
+                    prev->next = ptr2;
+                    prev = ptr2;
+                }
+                ptr2 = ptr2->next;
             }
         }
-        return head;
+        while(ptr1) {
+            prev->next = ptr1;
+            prev = ptr1;
+            ptr1 = ptr1->next;
+        }
+        while(ptr2) {
+            prev->next = ptr2;
+            prev = ptr2;
+            ptr2 = ptr2->next;
+        }
+        return head1;
     }
 };
