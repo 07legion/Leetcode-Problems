@@ -51,7 +51,8 @@ public:
             while(i < j) {
                 v[l++] = merge(v[i++], v[j--]);
             }
-            temp = (temp % 2 ? 1 + temp / 2 : temp / 2);
+            // temp = (temp % 2 ? 1 + temp / 2 : temp / 2);
+            temp = (temp + 1) / 2;
         }
         return v[0];
     }
