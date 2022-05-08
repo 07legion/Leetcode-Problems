@@ -4,7 +4,7 @@ private:
     vector<int> parent, ran;
     bool vis[502][502];
     vector<int> dx, dy;
-    map<int, int> mp;
+    unordered_map<int, int> mp;
     vector<vector<int> > v;
 public:
     void makeSet(int u) {
