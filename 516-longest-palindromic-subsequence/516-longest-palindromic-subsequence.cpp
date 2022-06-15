@@ -16,7 +16,7 @@ public:
         if (str[i] == str[j]) {
             return dp[i][j] = 2 + func(i+1, j-1);
         } 
-        else return dp[i][j] = max(func(i, j-1), func(i+1, j));
+        return dp[i][j] = max(func(i, j-1), func(i+1, j));
     }
     int longestPalindromeSubseq(string s) {
         str = s;
