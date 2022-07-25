@@ -7,8 +7,9 @@ private:
 public:
     bool func(string word) {
         if (dp.find(word) != dp.end()) return dp[word];
+        string pre = ""; 
         for(int i=1;i<word.length();i++) {
-            string pre = word.substr(0, i);
+            pre += word[i-1];
             string suff = word.substr(i);
             if (mp[pre] == true && (mp[suff] == true || func(suff))) {
                 dp[word] = true;
